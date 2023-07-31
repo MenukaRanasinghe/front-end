@@ -22,7 +22,7 @@ export class LoginComponent {
     console.log(this.password);
 
     let bodyData = {
-      email: this.username,
+      username: this.username,
       password: this.password,
     };
 
@@ -31,17 +31,25 @@ export class LoginComponent {
 
         if (resultData.status) 
         {
-      
-           this.router.navigateByUrl('/home');
+          console.log('Login Successful.');
+           this.router.navigate(['/home']);   
+           alert("Login Successfully");
+
     
 
         } 
         else
          {
-          alert("Incorrect Username or Password");
+          this.erroMessage="Incorrect Username or Password";
           console.log("Errror login");
+          alert("Incorrect Username or Password");
         }
-      });
+      },
+      (error)=>{
+        console.error("Error occurred:",error);
+        this.erroMessage="Internal Server Error";
+      }
+      );
     }
 
 }
